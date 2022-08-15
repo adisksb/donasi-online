@@ -31,6 +31,11 @@ export default {
         SET_NEXTPAGE(state, value) {
             state.nextPage = value
         },
+        SET_LOADMORE(state, data) {
+            data.forEach(row => {
+                state.campaigns.push(row);
+            });
+        },
     },
 
     actions: {
@@ -38,26 +43,36 @@ export default {
             const config = {
                 method: 'get',
                 url : 'campaign',
-                headers: {
-                    'Authorization' : 'Bearer ' + localStorage.getItem('token'),
-                }
             }
 
             await axios(config)      
             .then((response) => {
-                commit('SET_CAMPAIGNS', response.data.data.data)  ;
+                commit('SET_CAMPAIGNS', response.data.data.data);
+                // console.log('campaign vuex :', response.data.data);
+
                 if (response.data.data.current_page < response.data.data.last_page) {
-                    //commit ke mutation SET_NEXTEXISTS dengan true
-                    commit('SET_NEXTEXISTS', true)
-                    
-                    //commit ke mutation SET_NEXTPAGE dengan current page + 1
-                    commit('SET_NEXTPAGE', response.data.data.current_page + 1)
+                    commit('SET_NEXTEXISTS', true);
+                    commit('SET_NEXTPAGE', response.data.data.current_page + 1);
                 } else {
-                    //commit ke mutation SET_NEXTEXISTS dengan false
-                    commit('SET_NEXTEXISTS', false)
+                    commit('SET_NEXTEXISTS', false);
                 }             
             })
             .catch((error) => {
+                console.log(error);
+            })
+        },
+
+        async getLoadMore({commit}, nextPage) {
+            await axios.get(`/campaign?page=${nextPage}`)
+            .then(response => {
+                commit('SET_LOADMORE', response.data.data.data)
+                if (response.data.data.current_page < response.data.data.last_page) {
+                    commit('SET_NEXTEXISTS', true);
+                    commit('SET_NEXTPAGE', response.data.data.current_page + 1);
+                } else {
+                    commit('SET_NEXTEXISTS', false);
+                }
+            }).catch(error => {
                 console.log(error);
             })
         }

@@ -17,7 +17,7 @@
                           <p class="card-text mt-0 font-weight-bold">{{ campaign.user.name }}</p>
 
                           <div v-if="campaign.sum_donation.length > 0">
-                              <div v-for="donation in campaign.sum_donation" :key="donation">
+                              <div v-for="(donation, index) in campaign.sum_donation" :key="index">
                                   <div class="progress mb-2">
                                       <div 
                                           class="progress-bar bg-warning" 
@@ -68,11 +68,15 @@
               </div>
           </div>
       </div>
+
+      <div class="text-center mt-4 mb-4" v-if="nextExists">
+          <button @click="loadMore" class="btn btn-primary">LIHAT SEMUA</button>
+      </div>
   </div>
 </template>
 
 <script>
-import { mapActions }  from 'vuex';
+import { mapActions, mapGetters }  from 'vuex';
 import Search from '@/components/Search.vue';
 import Slider from '@/components/Slider.vue';
 import Category from '@/components/Category.vue';
@@ -97,17 +101,33 @@ export default {
   methods: {
         ...mapActions({
             campaignsModule: 'campaign/getCampaign',
+            loadMoreModule: 'campaign/getLoadMore',
         }),
 
         async getCampaign() {
             await this.campaignsModule();
             this.campaigns = this.$store.getters['campaign/campaigns'];
-            console.log(this.campaigns);
+        },
+
+        async loadMore() {
+            await this.loadMoreModule(this.nextPage);
         }
+    },
+
+    computed: {
+        ...mapGetters({
+              nextExists: 'campaign/nextExists',
+              nextPage: 'campaign/nextPage'
+        })
     },
 
     created() {
         this.getCampaign();
-    }
+    },
+
+    // mounted() {
+    //     console.log(this.nextExists);
+    //     console.log(this.nextPage);
+    // }
 }
 </script>
