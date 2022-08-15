@@ -4,6 +4,7 @@ import auth from './auth';
 import donation from './donation';
 import profile from './profile';
 import slider from './slider';
+import category from './category';
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         auth,
         donation,
         profile,
-        slider
+        slider,
+        category
     }
 });

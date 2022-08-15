@@ -1,8 +1,9 @@
 <template>
     <div class="container">
         <div v-if="dataSliders.length > 0">
-            <vueper-slides autoplay>
-                <vueper-slide v-for="slider in dataSliders"
+            <vueper-slides autoplay fixed-height="500px" 3d>
+                <vueper-slide 
+                    v-for="slider in dataSliders"
                     :key="slider.id"
                     :image="slider.image" 
                     :link="slider.link"
