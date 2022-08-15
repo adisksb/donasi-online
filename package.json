@@ -15,10 +15,10 @@
     "popper.js": "^1.16.1",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
-    "vue-content-loader": "^2.0.1",
+    "vue-content-loader": "^0.2.3",
     "vue-router": "^3.2.0",
     "vue-toastification": "^1.7.14",
-    "vueperslides": "^3.3.2",
+    "vueperslides": "^2.15.3",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
