@@ -5,6 +5,7 @@ import donation from './donation';
 import profile from './profile';
 import slider from './slider';
 import category from './category';
+import campaign from './campaign';
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
         donation,
         profile,
         slider,
-        category
+        category,
+        campaign
     }
 });

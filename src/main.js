@@ -14,7 +14,7 @@ axios.defaults.baseURL = 'http://localhost:8000/api/';
 
 Vue.config.productionTip = false;
 Vue.use(Toast);
-Vue.use(mixins);
+Vue.mixin(mixins);
 
 new Vue({
   router,
