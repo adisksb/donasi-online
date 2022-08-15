@@ -46,13 +46,21 @@ const routes = [
 
   // Profile
   {
-    path: '/profile',
-    name: 'profile',
-    component: () => import( /* webpackChunkName: "profile" */ '@/views/profile/Index.vue'),
+     path: '/profile',
+     name: 'profile',
+     component: () => import( /* webpackChunkName: "profile" */ '@/views/profile/Index.vue'),
+     meta: {
+         auth: true
+     }
+  },
+  {
+    path: '/profile/password',
+    name: 'update.password',
+    component: () => import( /* webpackChunkName: "update.password" */ '@/views/profile/Password.vue'),
     meta: {
         auth: true
     }
-},
+ },
 ]
 
 const router = new VueRouter({

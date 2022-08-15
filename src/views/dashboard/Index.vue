@@ -15,7 +15,9 @@
                     Profile Saya
                 </button>
                 <hr>
-                <button class="btn-profile btn btn-sm btn-secondary px-3">Ubah Password</button>
+                <button class="btn-profile btn btn-sm btn-secondary px-3" @click.prevent="updatePassword">
+                    Ubah Password
+                </button>
                 <hr>
                 <button class="btn-profile btn btn-sm btn-danger px-3" @click.prevent="logout">
                     Logout
@@ -68,6 +70,10 @@ export default {
 
         profile() {
             this.$router.push({name : 'profile'});
+        },
+
+        updatePassword() {
+            this.$router.push({name : 'update.password'});
         },
 
         async logout() {
