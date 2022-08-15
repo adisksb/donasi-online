@@ -19,7 +19,12 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Donasi Saya</a>
+                            <router-link 
+                                :to="{name: 'donation.index'}" 
+                                class="nav-link"
+                            >
+                                Donasi Saya
+                            </router-link>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link">Campaign</a>

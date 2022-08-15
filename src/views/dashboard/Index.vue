@@ -7,9 +7,13 @@
             <hr>
 
             <div>
-                <button class="btn-profile btn btn-sm btn-info px-3">Donasi Saya</button>
+                <button class="btn-profile btn btn-sm btn-info px-3" @click.prevent="donation">
+                    Donasi Saya
+                </button>
                 <hr>
-                <button class="btn-profile btn btn-sm btn-success px-3">Profile Saya</button>
+                <button class="btn-profile btn btn-sm btn-success px-3" @click.prevent="profile">
+                    Profile Saya
+                </button>
                 <hr>
                 <button class="btn-profile btn btn-sm btn-secondary px-3">Ubah Password</button>
                 <hr>
@@ -36,7 +40,7 @@ export default {
     },
 
     methods: {
-         ...mapActions({
+        ...mapActions({
             logoutAuth: 'auth/logout',
         }),
 
@@ -56,6 +60,14 @@ export default {
             .catch((error) => {
                 console.log(error);
             })
+        },
+
+        donation(){
+            this.$router.push({name : 'donation.index'});
+        },
+
+        profile() {
+            this.$router.push({name : 'profile'});
         },
 
         async logout() {

@@ -7,32 +7,52 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: Home
+      path: '/',
+      name: 'home',
+      component: Home
   },
 
   // Auth
   {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue')
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue')
   },
   {
-    path: '/register',
-    name: 'register',
-    component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Register.vue')
+      path: '/register',
+      name: 'register',
+      component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Register.vue')
   },
 
   // Dashboard
   {
-    path: '/dashboard',
-    name: 'dashboard',
+      path: '/dashboard',
+      name: 'dashboard',
+      meta: {
+          auth: true
+      },
+      component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/Index.vue')
+  },
+
+  // Donation
+  {
+      path: '/donation',
+      name: 'donation.index',
+      meta: {
+          auth: true
+      },
+      component: () => import(/* webpackChunkName: "donation" */ '@/views/donation/Index.vue')
+  },
+
+  // Profile
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import( /* webpackChunkName: "profile" */ '@/views/profile/Index.vue'),
     meta: {
         auth: true
-    },
-    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/Index.vue')
-  }
+    }
+},
 ]
 
 const router = new VueRouter({
