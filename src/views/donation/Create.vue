@@ -47,7 +47,6 @@ export default {
         }),
 
         storeDonation() {
-            console.log('Form Lanjut Bayar :', this.form);
             if(this.form.amount < 10000) {
                 this.$toast.error('Donasi Minimal Rp. 10.000')
                 return false;

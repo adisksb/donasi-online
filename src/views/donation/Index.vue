@@ -38,9 +38,9 @@
                 </div>
             </div>
             <div class="text-center mt-3" v-show="nextExists">
-                <a @click="loadMore"
+                <button @click="loadMore"
                     class="btn btn-secondary">LIHAT SEMUA <i class="fa fa-long-arrow-alt-right"></i>
-                </a>
+                </button>
             </div>
         </div>
 
