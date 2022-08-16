@@ -51,7 +51,7 @@ export default {
             await axios(config)      
             .then((response) => {
                 commit('SET_DONATIONS', response.data.data.data);
-                // console.log(response.data.data.data);
+                console.log('SET_DONATIONS :', response.data.data.data);
                 if (response.data.data.current_page < response.data.data.last_page) {
                     commit('SET_NEXTEXISTS', true);
                     commit('SET_NEXTPAGE', response.data.data.current_page + 1);

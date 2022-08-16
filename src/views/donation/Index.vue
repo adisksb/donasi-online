@@ -1,10 +1,14 @@
 <template>
     <div class="container mt-4">
+        <div v-if="loading == true">
+            <FacebookLoader />
+        </div>
+
         <div v-if="donations.length > 0">
-            <h4>Riwayat Donasi Saya</h4>
+            <h4 class="mb-3 text-center">Riwayat Donasi Saya</h4>
             <div class="row">
-                <div class="col-4" v-for="donation in donations" :key="donation.id">
-                    <div class="card" style="width: 18rem;">
+                <div class="col-md-6" v-for="donation in donations" :key="donation.id">
+                    <div class="card shadow mb-3">
                         <img 
                             :src="donation.campaign.image" 
                             class="card-img-top" 
@@ -18,20 +22,16 @@
                             <p>Rp. {{ formatPrice(donation.amount) }}</p>
                             
                             <div v-if="donation.status == 'pending'">
-                                <button class="btn btn-sm btn-info">BAYAR SEKARANG</button>
+                                <button class="btn font-weight-bold btn-primary w-100">BAYAR SEKARANG</button>
                             </div>
-                            <hr>
                             <div v-if="donation.status == 'success'">
-                                <button class="btn btn-sm btn-success">Berhasil</button>
-                            </div>
-                            <div v-else-if="donation.status == 'pending'">
-                                <button class="btn btn-sm btn-info">Pending</button>
-                            </div>
-                            <div v-else-if="donation.status == 'expired'">
-                                <button class="btn btn-sm btn-primary">Dibatalkan</button>
+                                <button class="btn font-weight-bold btn-success w-100">Berhasil</button>
                             </div>
                             <div v-else-if="donation.status == 'failed'">
-                                <button class="btn btn-sm btn-danger">Dibatalkan</button>
+                                <button class="btn font-weight-bold btn-danger w-100">Pending</button>
+                            </div>
+                            <div v-else-if="donation.status == 'expired'">
+                                <button class="btn font-weight-bold btn-danger w-100">Dibatalkan</button>
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,8 @@
                 </a>
             </div>
         </div>
-        <div class="text-center" v-else>
+
+        <div class="text-center" v-if="empty == true">
             <h4>Riwayat Donasi Saya</h4>
             <div class="text-danger">
                 Anda Belum Memiliki Transaksi Donasi Saat ini!
@@ -54,9 +55,22 @@
 
 <script>
 import { mapActions, mapGetters }  from 'vuex';
+import { FacebookLoader } from 'vue-content-loader';
 
 export default {
     name: 'donation.index',
+
+    components: {
+        FacebookLoader
+    },
+
+    data() {
+        return {
+            donations : [],
+            loading : false,
+            empty : false,
+        }
+    },
 
     methods: {
         ...mapActions({
@@ -65,17 +79,22 @@ export default {
         }),
 
         async dataDonations() {
+            this.loading = true;
             await this.getDonationModule();
+            this.donations = this.$store.getters['donation/donations'];
+            this.loading = false;
+            if (this.donations.length <= 0) {
+                this.empty = true;
+            }
         },
 
-        async dataLoadMore() {
-            await this.getLoadMoreModule(this.nextPage.value);
+        async loadMore() {
+            await this.getLoadMoreModule(this.nextPage);
         }
     },
 
     computed: {
         ...mapGetters({
-            donations : 'donation/donations',
             nextExists  : 'donation/nextExists',
             nextPage  : 'donation/nextPage',
         })
@@ -83,11 +102,6 @@ export default {
 
     created() {
         this.dataDonations();
-        this.dataLoadMore();
     },
-
-    mounted() {
-        console.log(this.donations);
-    }
 }
 </script>
