@@ -54,13 +54,25 @@ const routes = [
      }
   },
   {
-    path: '/profile/password',
-    name: 'update.password',
-    component: () => import( /* webpackChunkName: "update.password" */ '@/views/profile/Password.vue'),
-    meta: {
-        auth: true
-    }
- },
+     path: '/profile/password',
+     name: 'update.password',
+     component: () => import( /* webpackChunkName: "update.password" */ '@/views/profile/Password.vue'),
+     meta: {
+         auth: true
+     }
+  },
+
+  // Category
+  {
+     path: '/category',
+     name: 'category',
+     component: () => import( /* webpackChunkName: "category" */ '@/views/category/Index.vue')
+  },
+  {
+     path: '/category/:slug',
+     name: 'category.show',
+     component: () => import( /* webpackChunkName: "category.show" */ '@/views/category/Show.vue')
+  },
 ]
 
 const router = new VueRouter({

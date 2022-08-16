@@ -2,24 +2,24 @@
     <div class="container">
         <div class="row d-flex justify-content-between" v-if="categories.length > 0">
             <div class="col-md-3 text-center mb-2" v-for="category in categories" :key="category.id">
-                <a href="#" class="text-decoration-none">
+                <router-link :to="{name: 'category.show', params:{slug: category.slug}}" class="text-decoration-none">
                     <div class="mx-auto rounded bg-card p-3 text-white w-75">
                         <div>
                             <img :src="category.image" width="40" class="inline-block mb-2">
                         </div>
                         {{ category.name.toUpperCase() }}
                     </div>
-                </a>
+                </router-link>
             </div>
             <div class="col-md-3 text-center align-items-center mb-2">
-                <a href="#" class="text-decoration-none">
+                <router-link :to="{name: 'category.index'}" class="text-decoration-none">
                     <div class="mx-auto rounded bg-card p-3 text-white w-75">
                         <div>
                             <img src="@/assets/images/menu.png" width="40" class="inline-block mb-2">
                         </div>
                         LAINNYA
                     </div>
-                </a>
+                </router-link>
             </div>
         </div>
         <div v-else>

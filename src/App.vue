@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="pb-5 bg-container">
+  <div id="app" class="pb-5 bg-container vh-100">
       <Navbar> </Navbar>
       <router-view></router-view>
   </div>
@@ -13,12 +13,12 @@ export default {
 
   components: {
       Navbar,
-  }
+  },
 }
 </script>
 
 <style>
-.bg-container {
+/* .bg-container {
     background: #A2B5BB;
-}
+} */
 </style>

@@ -48,8 +48,6 @@ export default {
             await axios(config)      
             .then((response) => {
                 commit('SET_CAMPAIGNS', response.data.data.data);
-                // console.log('campaign vuex :', response.data.data);
-
                 if (response.data.data.current_page < response.data.data.last_page) {
                     commit('SET_NEXTEXISTS', true);
                     commit('SET_NEXTPAGE', response.data.data.current_page + 1);
@@ -58,7 +56,16 @@ export default {
                 }             
             })
             .catch((error) => {
-                console.log(error);
+                if (!error.response) {
+                    console.log('Error: Network Error');
+                } else {
+                    console.log(error);
+                    if(error.message == 'Network Error') {
+                        localStorage.removeItem('authenticated');
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('token'); 
+                    }
+                }
             })
         },
 
