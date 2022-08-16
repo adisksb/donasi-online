@@ -55,10 +55,12 @@
                                 <button class="btn btn-danger">DONASI DITUTUP</button>
                             </div>
                             <div v-else>
-                                <a href="#"
-                                    class="btn btn-success w-100 font-weight-bold">
+                                <router-link 
+                                    :to="{name: 'donation.create', params:{slug: this.$route.params.slug}}"
+                                    class="btn btn-success w-100 font-weight-bold"
+                                >
                                     DONASI SEKARANG
-                                </a>
+                                </router-link>
                             </div>
                         </div>
                     </div>

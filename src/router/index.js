@@ -41,7 +41,15 @@ const routes = [
         meta: {
             auth: true
         },
-        component: () => import(/* webpackChunkName: "donation" */ '@/views/donation/Index.vue')
+        component: () => import(/* webpackChunkName: "donation.index" */ '@/views/donation/Index.vue')
+    },
+    {
+        path: '/donation/create/:slug',
+        name: 'donation.create',
+        component: () => import( /* webpackChunkName: "donation.create" */ '@/views/donation/Create.vue'),
+        meta: {
+            auth: true
+        }
     },
 
     // Profile
