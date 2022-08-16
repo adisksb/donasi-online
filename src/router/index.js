@@ -65,8 +65,8 @@ const routes = [
   // Category
   {
      path: '/category',
-     name: 'category',
-     component: () => import( /* webpackChunkName: "category" */ '@/views/category/Index.vue')
+     name: 'category.index',
+     component: () => import( /* webpackChunkName: "category.index" */ '@/views/category/Index.vue')
   },
   {
      path: '/category/:slug',

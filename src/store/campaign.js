@@ -56,15 +56,11 @@ export default {
                 }             
             })
             .catch((error) => {
-                if (!error.response) {
-                    console.log('Error: Network Error');
-                } else {
-                    console.log(error);
-                    if(error.message == 'Network Error') {
-                        localStorage.removeItem('authenticated');
-                        localStorage.removeItem('user');
-                        localStorage.removeItem('token'); 
-                    }
+                console.log(error);
+                if(error.message == 'Network Error') {
+                    localStorage.removeItem('authenticated');
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('token'); 
                 }
             })
         },

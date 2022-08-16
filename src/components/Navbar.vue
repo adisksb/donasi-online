@@ -20,11 +20,13 @@
                                 Beranda
                             </router-link>
                         </li>
+                         <li class="nav-item">
+                            <router-link :to="{name: 'category.index'}" class="nav-link">
+                                Category
+                            </router-link>
+                        </li>
                         <li class="nav-item">
-                            <router-link 
-                                :to="{name: 'donation.index'}" 
-                                class="nav-link"
-                            >
+                            <router-link :to="{name: 'donation.index'}" class="nav-link">
                                 Donasi Saya
                             </router-link>
                         </li>

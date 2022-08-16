@@ -1,7 +1,9 @@
 <template>
-  <div id="app" class="pb-5 bg-container vh-100">
+  <div id="app" class="bg-container vh-100">
       <Navbar> </Navbar>
-      <router-view></router-view>
+      <div class="pb-3">
+          <router-view></router-view>
+      </div>
   </div>
 </template>
 
