@@ -7,6 +7,10 @@ export default {
         campaigns: [],
         nextExists: false,
         nextPage: 0,
+        user: {},
+        detailCampaign: [],
+        sumDonation: [],
+        donations: []
     },
 
     getters: {
@@ -19,6 +23,18 @@ export default {
         nextPage(state) {
             return state.nextPage
         },
+        user(state) {
+            return state.user
+        },
+        detailCampaign(state) {
+            return state.detailCampaign
+        },
+        sumDonation(state) {
+            return state.sumDonation
+        },
+        donations(state) {
+            return state.donations
+        },
     },
 
     mutations: {
@@ -30,6 +46,18 @@ export default {
         },
         SET_NEXTPAGE(state, value) {
             state.nextPage = value
+        },
+        SET_USER(state, value) {
+            state.user = value
+        },
+        SET_DETAIL_CAMPAIGN(state, value) {
+            state.detailCampaign = value
+        },
+        SET_SUM_DONATION(state, value) {
+            state.sumDonation = value
+        },
+        SET_DONATIONS(state, value) {
+            state.donations = value
         },
         SET_LOADMORE(state, data) {
             data.forEach(row => {
@@ -78,6 +106,31 @@ export default {
             }).catch(error => {
                 console.log(error);
             })
-        }
+        },
+
+        async getDetailCampaign({commit}, slug) {
+            const config = {
+                method: 'get',
+                url : `campaign/${slug}`,
+            }
+
+            await axios(config)      
+            .then((response) => {
+                commit('SET_DETAIL_CAMPAIGN', response.data.data);
+                commit('SET_USER', response.data.data.user); 
+                commit('SET_SUM_DONATION', response.data.data.sum_donation);
+                commit('SET_DONATIONS', response.data.donations);     
+                // console.log('SET_SUM_DONATION :', response.data.data.sum_donation);   
+                // console.log('SET_DONATIONS :', response.data.donations); 
+            })
+            .catch((error) => {
+                console.log(error);
+                if(error.message == 'Network Error') {
+                    localStorage.removeItem('authenticated');
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('token'); 
+                }
+            })
+        },
     },
 }

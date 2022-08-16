@@ -12,11 +12,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <router-link 
-                                :to="{name: 'home'}" 
-                                class="nav-link" 
-                                exact
-                            >
+                            <router-link :to="{name: 'home'}" class="nav-link" exact>
                                 Beranda
                             </router-link>
                         </li>
@@ -26,12 +22,14 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link :to="{name: 'donation.index'}" class="nav-link">
-                                Donasi Saya
+                            <router-link :to="{name: 'campaign.index'}" class="nav-link">
+                                Campaign
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Campaign</a>
+                            <router-link :to="{name: 'donation.index'}" class="nav-link">
+                                Donasi Saya
+                            </router-link>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
