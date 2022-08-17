@@ -13,7 +13,7 @@
                               <div v-for="(donation, index) in campaign.sum_donation" :key="index">
                                   <div class="progress mb-2">
                                       <div 
-                                          class="progress-bar bg-warning" 
+                                          class="progress-bar-striped bg-warning" 
                                           role="progressbar" 
                                           v-bind:style="{ width: percentage(donation.total, campaign.target_donation) + '%' }"
                                           v-bind:aria-valuenow="donation.total"

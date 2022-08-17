@@ -9,7 +9,7 @@
                         
                         <div class="progress mb-2 mt-3">
                             <div 
-                                class="progress-bar bg-warning" 
+                                class="progress-bar-striped bg-warning" 
                                 role="progressbar" 
                                 v-bind:style="{ width: percentage(campaign.sum_donation[0].total, campaign.target_donation) + '%' }"
                                 v-bind:aria-valuenow="campaign.sum_donation[0].total/campaign.target_donation"
