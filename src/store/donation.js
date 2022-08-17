@@ -7,6 +7,7 @@ export default {
         donations: [],
         nextExists: false,
         nextPage: 0,
+        message: '',
     },
 
     getters: {
@@ -19,6 +20,9 @@ export default {
         nextPage(state) {
             return state.nextPage
         },
+        message(state) {
+            return state.message
+        },
     },
 
     mutations: {
@@ -30,6 +34,9 @@ export default {
         },
         SET_NEXTPAGE(state, value) {
             state.nextPage = value
+        },
+        SET_MESSAGE(state, value) {
+            state.message = value
         },
         SET_LOADMORE(state, data) {
             data.forEach(row => {
@@ -87,11 +94,11 @@ export default {
             })
         },
 
-        storeDonation({commit}, data) {
+        storeDonation({commit},data) {
             return new Promise((resolve, reject) => {
                 axios.post('donation', data, {headers: {'Authorization': `Bearer ${localStorage.getItem('token')}`}})
                     .then((response) => {
-                        commit('');
+                        commit('SET_MESSAGE', 'Proses Donasi Berhasil');
                         resolve(response);
                     })
                     .catch(error => {

@@ -6,14 +6,38 @@
                     <img :src="campaign.image" class="card-img-top" :alt="campaign.title">
                     <div class="card-body">
                         <h5 class="card-title mb-0">{{ campaign.title }}</h5>
-
-                        <div v-if="sumDonation.length > 0">
-                            <div v-for="donation in sumDonation" :key="donation">
-                                <div class="progress mb-2">
+                        
+                        <div class="progress mb-2 mt-3">
+                            <div 
+                                class="progress-bar bg-warning" 
+                                role="progressbar" 
+                                v-bind:style="{ width: percentage(campaign.sum_donation[0].total, campaign.target_donation) + '%' }"
+                                v-bind:aria-valuenow="campaign.sum_donation[0].total/campaign.target_donation"
+                                aria-valuemin="0" 
+                                aria-valuemax="100"
+                            >
+                            </div>
+                        </div>
+                        <p>
+                            <span class="font-weight-bold text-primary">
+                                Rp. {{ formatPrice(campaign.sum_donation[0].total) }} 
+                            </span> Terkumpul dari 
+                            <span class="font-weight-bold text-success">Rp. {{ formatPrice(campaign.target_donation) }}</span>
+                        </p>
+                        <p>
+                            Persentase Donasi : 
+                            <span class="text-info font-weight-bold">
+                                {{ percentage(campaign.sum_donation[0].total, campaign.target_donation) }} %
+                            </span> 
+                        </p>
+                        
+                        <!-- <div v-if="sumDonation.length > 0">
+                            <div v-for="(donation, index) in sumDonation" :key="index">
+                                <div class="progress mb-2 mt-3">
                                     <div 
                                         class="progress-bar bg-warning" 
                                         role="progressbar" 
-                                        v-bind:style="{ width: percentage(donation.total, campaign.target_donation) + '%' }"
+                                        v-bind:style="{ width: percentage(donation.total/campaign.target_donation) + '%' }"
                                         v-bind:aria-valuenow="donation.total"
                                         aria-valuemin="0" 
                                         aria-valuemax="100"
@@ -29,7 +53,7 @@
                             </div>
                         </div>
                         <div v-else>
-                            <div class="progress mb-2">
+                            <div class="progress mb-2 mt-3">
                                 <div 
                                     class="progress-bar bg-warning" 
                                     role="progressbar" 
@@ -44,11 +68,14 @@
                                 <span class="font-weight-bold text-primary">Rp. 0 </span> terkumpul dari
                                 <span class="font-weight-bold text-success">Rp. {{ formatPrice(campaign.target_donation) }}</span>
                             </p>
-                        </div>
-                        <div class="mt-3">
-                            <span class="font-weight-bold">{{ donations.length }}</span> Donasi
-                            <br>
-                            <strong>{{ countDay(campaign.max_date) }}</strong> hari lagi
+                        </div> -->
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <span class="font-weight-bold">{{ donations.length }}</span> Donasi
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-md-end">
+                                <span class="font-weight-bold mr-1">{{ countDay(campaign.max_date) }}</span> hari lagi
+                            </div>
                         </div>
                         <div class="mt-3">
                             <div v-if="maxDate(campaign.max_date) == true">
@@ -85,21 +112,26 @@
                 </div>
                 <div class="card shadow mt-2">
                     <div class="card-header text-center font-weight-bold">
-                        Donasi <span class="text-primary">({{ donations.length }})</span>
+                        Donatur <span class="text-primary">({{ donations.length }})</span>
                     </div>
                     <div class="card-body">
                         <div v-for="donation in donations" :key="donation.id">
                             <div class="card mb-2">
                                 <div class="card-body">
-                                    <p>{{ donation.donatur.name }}</p>
-                                    <div>
-                                        Berdonasi sebesar <span class="font-weight-bold">Rp. {{ formatPrice(donation.amount) }}</span>
-                                    </div>
-                                    <div>
-                                        {{ donation.pray }}
-                                    </div>
-                                    <div>
+                                    <div class="mb-3">
+                                        <p class="font-weight-bold mb-0 mt-0">{{ donation.donatur.name }}</p>
                                         {{ donation.created_at }}
+                                    </div>
+                                    <div>
+                                        Berdonasi sebesar 
+                                        <span class="font-weight-bold text-primary">
+                                            Rp. {{ formatPrice(donation.amount) }}
+                                        </span>
+                                    </div>
+                                    <hr>
+                                    <div class="mt-1">
+                                        <p class="mb-0 mt-">Doa :</p>
+                                        {{ donation.pray }}
                                     </div>
                                 </div>
                             </div>
@@ -149,6 +181,8 @@ export default {
             this.sumDonation = this.$store.getters['campaign/sumDonation'];
             this.donations = this.$store.getters['campaign/donations'];
             this.loading = false;
+            console.log('sumDonation :', this.sumDonation);
+            console.log('campaign :', this.campaign);
         },
     },
 
@@ -165,3 +199,5 @@ export default {
     }
 }
 </style>
+
+<!-- v-bind:style="{ width: percentage(donation.total, campaign.target_donation) + '%' }" -->

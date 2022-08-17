@@ -105,11 +105,11 @@ export default {
                 await window.snap.pay(snap_token, {
                     onSuccess: function () {
                         router.push({name: 'donation.success'});
-                        this.$toast.success('Transaksi Berhasil, Silahkan Melakukan Pembayaran Donasi');
+                        this.$toast.success('Transaksi Pembayaran Berhasil');
                     },
                     onPending: function () {
-                        window.location.reload();
-                        this.$toast.success('Transaksi belum Berhasil, Silahkan Melakukan Transaksi Ulang');
+                        router.push({name: 'donation.pending'});
+                        this.$toast.success('Transaksi Berhasil, Silahkan Melakukan Pembayaran Donasi');
                     },
                     onError: function () {
                         router.push({name: 'donation.failed'}); 
