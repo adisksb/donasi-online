@@ -51,6 +51,30 @@ const routes = [
             auth: true
         }
     },
+    {
+        path: '/donation/success',
+        name: 'donation.success',
+        meta: {
+            auth: true
+        },
+        component: () => import(/* webpackChunkName: "donation.success" */ '@/views/donation/Success.vue')
+    },
+    {
+        path: '/donation/failed',
+        name: 'donation.failed',
+        meta: {
+            auth: true
+        },
+        component: () => import(/* webpackChunkName: "donation.failed" */ '@/views/donation/Failed.vue')
+    },
+    {
+        path: '/donation/pending',
+        name: 'donation.pending',
+        meta: {
+            auth: true
+        },
+        component: () => import(/* webpackChunkName: "donation.pending" */ '@/views/donation/Pending.vue')
+    },
 
     // Profile
     {
@@ -92,6 +116,13 @@ const routes = [
         path: '/campaign/:slug',
         name: 'campaign.show',
         component: () => import( /* webpackChunkName: "campaign.show" */ '@/views/campaign/Show.vue')
+    },
+
+    // 404
+    {
+        path: '*',
+        name: 'error.page',
+        component: () => import( /* webpackChunkName: "error.page" */ '@/views/404/Index.vue')
     },
 ]
 

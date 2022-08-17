@@ -64,7 +64,7 @@
 <script>
 import { mapActions, mapGetters }  from 'vuex';
 import { FacebookLoader } from 'vue-content-loader';
-// import router from '../../router';
+import router from '../../router';
 
 export default {
     name: 'donation.index',
@@ -101,21 +101,18 @@ export default {
             await this.getLoadMoreModule(this.nextPage);
         },
 
-        payment(snap_token) {
-                window.snap.pay(snap_token, {
+        async payment(snap_token) {
+                await window.snap.pay(snap_token, {
                     onSuccess: function () {
-                        // router.push({name: 'donation.index'})
-                        window.location.reload();  
+                        router.push({name: 'donation.success'});
                         this.$toast.success('Transaksi Berhasil, Silahkan Melakukan Pembayaran Donasi');
                     },
                     onPending: function () {
-                        // router.push({name: 'donation.index'})
                         window.location.reload();
                         this.$toast.success('Transaksi belum Berhasil, Silahkan Melakukan Transaksi Ulang');
                     },
                     onError: function () {
-                        // router.push({name: 'donation.index'}) 
-                        window.location.reload(); 
+                        router.push({name: 'donation.failed'}); 
                         this.$toast.success('Transaksi Gagal');
                     }
                 })
