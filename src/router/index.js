@@ -118,6 +118,13 @@ const routes = [
         component: () => import( /* webpackChunkName: "campaign.show" */ '@/views/campaign/Show.vue')
     },
 
+    // Search
+    {
+        path: '/search',
+        name: 'search',
+        component: () => import( /* webpackChunkName: "search" */ '@/views/search/Index.vue')
+    },
+
     // 404
     {
         path: '*',
