@@ -181,8 +181,8 @@ export default {
             this.sumDonation = this.$store.getters['campaign/sumDonation'];
             this.donations = this.$store.getters['campaign/donations'];
             this.loading = false;
-            console.log('sumDonation :', this.sumDonation);
-            console.log('campaign :', this.campaign);
+            // console.log('sumDonation :', this.sumDonation);
+            // console.log('campaign :', this.campaign);
         },
     },
 
