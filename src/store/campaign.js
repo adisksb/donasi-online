@@ -5,6 +5,8 @@ export default {
 
     state: {
         campaigns: [],
+        searchCampaigns: [],
+        query: '',
         nextExists: false,
         nextPage: 0,
         user: {},
@@ -16,6 +18,12 @@ export default {
     getters: {
         campaigns(state) {
             return state.campaigns
+        },
+        searchCampaigns(state) {
+            return state.searchCampaigns
+        },
+        query(state) {
+            return state.query
         },
         nextExists(state) {
             return state.nextExists
@@ -40,6 +48,12 @@ export default {
     mutations: {
         SET_CAMPAIGNS(state, value) {
             state.campaigns = value
+        },
+        SET_SEARCH_CAMPAIGNS(state, value) {
+            state.searchCampaigns = value
+        },
+        SET_QUERY(state, value) {
+            state.query = value
         },
         SET_NEXTEXISTS(state, value) {
             state.nextExists = value
@@ -122,6 +136,30 @@ export default {
                 commit('SET_DONATIONS', response.data.donations);     
                 // console.log('SET_SUM_DONATION :', response.data.data.sum_donation);   
                 // console.log('SET_DONATIONS :', response.data.donations); 
+            })
+            .catch((error) => {
+                console.log(error);
+                if(error.message == 'Network Error') {
+                    localStorage.removeItem('authenticated');
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('token'); 
+                }
+            })
+        },
+
+        async searchCampaign({commit}, querySearch ='') {
+            const config = {
+                method: 'get',
+                url : `search?q=${querySearch}`,
+                headers: {
+                    'Authorization' : 'Bearer ' + localStorage.getItem('token'),
+                }
+            }
+                
+            await axios(config)      
+            .then((response) => {
+                commit('SET_QUERY', querySearch); 
+                commit('SET_SEARCH_CAMPAIGNS', response.data.data.data);  
             })
             .catch((error) => {
                 console.log(error);

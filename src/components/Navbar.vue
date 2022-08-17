@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
+            <div class="container-fluid">
                 <router-link :to="{name: 'home'}" class="navbar-brand" href="#">
                     Donasi Kita
                 </router-link>
@@ -32,6 +32,7 @@
                             </router-link>
                         </li>
                     </ul>
+                    <Search />
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <router-link 
@@ -69,9 +70,14 @@
 
 <script>
 import { mapGetters }  from 'vuex';
+import Search from '@/components/Search.vue';
 
 export default {
     name: 'navbar',
+
+    components: {
+        Search,
+    },
 
     computed: {
         ...mapGetters({

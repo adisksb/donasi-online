@@ -122,6 +122,7 @@ const routes = [
     {
         path: '/search',
         name: 'search',
+        props: true,
         component: () => import( /* webpackChunkName: "search" */ '@/views/search/Index.vue')
     },
 

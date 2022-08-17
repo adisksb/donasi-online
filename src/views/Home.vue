@@ -1,12 +1,8 @@
 <template>
   <div>
-      <Search />
       <div class="mt-2">
           <Slider />
       </div>
-      <!-- <div class="mt-4">
-          <Category />
-      </div> -->
       <div class="mt-4 container">
           <div class="row" v-if="campaigns.length > 0">
               <div class="col-md-6 mb-3" v-for="campaign in campaigns" :key="campaign.id">
@@ -83,18 +79,14 @@
 
 <script>
 import { mapActions, mapGetters }  from 'vuex';
-import Search from '@/components/Search.vue';
 import Slider from '@/components/Slider.vue';
-// import Category from '@/components/Category.vue';
 import { FacebookLoader } from 'vue-content-loader';
 
 export default {
   name: 'home',
 
   components: {
-      Search,
       Slider,
-    //   Category,
       FacebookLoader
   },
 
