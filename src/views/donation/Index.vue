@@ -22,16 +22,24 @@
                             <p>Rp. {{ formatPrice(donation.amount) }}</p>
                             
                             <div v-if="donation.status == 'pending'">
-                                <button class="btn font-weight-bold btn-primary w-100">BAYAR SEKARANG</button>
+                                <button @click.prevent="payment(donation.snap_token)" class="btn font-weight-bold btn-primary w-100">
+                                    BAYAR SEKARANG
+                                </button>
                             </div>
                             <div v-if="donation.status == 'success'">
-                                <button class="btn font-weight-bold btn-success w-100">Berhasil</button>
+                                <button class="btn font-weight-bold btn-success w-100" disabled>
+                                    Berhasil
+                                </button>
                             </div>
                             <div v-else-if="donation.status == 'failed'">
-                                <button class="btn font-weight-bold btn-danger w-100">Pending</button>
+                                <button class="btn font-weight-bold btn-danger w-100">
+                                    Pending
+                                </button>
                             </div>
                             <div v-else-if="donation.status == 'expired'">
-                                <button class="btn font-weight-bold btn-danger w-100">Dibatalkan</button>
+                                <button class="btn font-weight-bold btn-danger w-100">
+                                    Dibatalkan
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -56,6 +64,7 @@
 <script>
 import { mapActions, mapGetters }  from 'vuex';
 import { FacebookLoader } from 'vue-content-loader';
+// import router from '../../router';
 
 export default {
     name: 'donation.index',
@@ -90,8 +99,28 @@ export default {
 
         async loadMore() {
             await this.getLoadMoreModule(this.nextPage);
-        }
-    },
+        },
+
+        payment(snap_token) {
+                window.snap.pay(snap_token, {
+                    onSuccess: function () {
+                        // router.push({name: 'donation.index'})
+                        window.location.reload();  
+                        this.$toast.success('Transaksi Berhasil, Silahkan Melakukan Pembayaran Donasi');
+                    },
+                    onPending: function () {
+                        // router.push({name: 'donation.index'})
+                        window.location.reload();
+                        this.$toast.success('Transaksi belum Berhasil, Silahkan Melakukan Transaksi Ulang');
+                    },
+                    onError: function () {
+                        // router.push({name: 'donation.index'}) 
+                        window.location.reload(); 
+                        this.$toast.success('Transaksi Gagal');
+                    }
+                })
+            }
+        },
 
     computed: {
         ...mapGetters({
