@@ -10,7 +10,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "vue-toastification/dist/index.css";
 import './registerServiceWorker';
 
-axios.defaults.baseURL = 'http://localhost:8000/api/';
+// axios.defaults.baseURL = 'http://localhost:8000/api/';
+axios.defaults.baseURL = 'https://donasikita.nursyafriady.com/api';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 Vue.config.productionTip = false;
 Vue.use(Toast);
