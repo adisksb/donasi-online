@@ -7,38 +7,14 @@
                     <div class="card-body">
                         <h5 class="card-title mb-0">{{ campaign.title }}</h5>
                         
-                        <div class="progress mb-2 mt-3">
-                            <div 
-                                class="progress-bar-striped bg-warning" 
-                                role="progressbar" 
-                                v-bind:style="{ width: percentage(campaign.sum_donation[0].total, campaign.target_donation) + '%' }"
-                                v-bind:aria-valuenow="campaign.sum_donation[0].total/campaign.target_donation"
-                                aria-valuemin="0" 
-                                aria-valuemax="100"
-                            >
-                            </div>
-                        </div>
-                        <p>
-                            <span class="font-weight-bold text-primary">
-                                Rp. {{ formatPrice(campaign.sum_donation[0].total) }} 
-                            </span> Terkumpul dari 
-                            <span class="font-weight-bold text-success">Rp. {{ formatPrice(campaign.target_donation) }}</span>
-                        </p>
-                        <p>
-                            Persentase Donasi : 
-                            <span class="text-info font-weight-bold">
-                                {{ percentage(campaign.sum_donation[0].total, campaign.target_donation) }} %
-                            </span> 
-                        </p>
-                        
-                        <!-- <div v-if="sumDonation.length > 0">
-                            <div v-for="(donation, index) in sumDonation" :key="index">
+                        <div>
+                            <div v-if="campaign.sum_donation .length > 0">
                                 <div class="progress mb-2 mt-3">
                                     <div 
-                                        class="progress-bar bg-warning" 
+                                        class="progress-bar-striped bg-warning" 
                                         role="progressbar" 
-                                        v-bind:style="{ width: percentage(donation.total/campaign.target_donation) + '%' }"
-                                        v-bind:aria-valuenow="donation.total"
+                                        v-bind:style="{ width: percentage(campaign.sum_donation[0].total, campaign.target_donation) + '%' }"
+                                        v-bind:aria-valuenow="campaign.sum_donation[0].total/campaign.target_donation"
                                         aria-valuemin="0" 
                                         aria-valuemax="100"
                                     >
@@ -46,29 +22,44 @@
                                 </div>
                                 <p>
                                     <span class="font-weight-bold text-primary">
-                                        Rp. {{ formatPrice(donation.total) }} 
-                                    </span> terkumpul dari
+                                        Rp. {{ formatPrice(campaign.sum_donation[0].total) }} 
+                                    </span> Terkumpul dari 
                                     <span class="font-weight-bold text-success">Rp. {{ formatPrice(campaign.target_donation) }}</span>
+                                </p>
+                                <p>
+                                    Persentase Donasi : 
+                                    <span class="text-info font-weight-bold">
+                                        {{ percentage(campaign.sum_donation[0].total, campaign.target_donation) }} %
+                                    </span> 
+                                </p>
+                            </div>
+                            <div v-else>
+                                <div class="progress mb-2 mt-3">
+                                    <div 
+                                        class="progress-bar-striped bg-warning" 
+                                        role="progressbar" 
+                                        v-bind:style="{ width: percentage(0, campaign.target_donation) + '%' }"
+                                        v-bind:aria-valuenow="0/campaign.target_donation"
+                                        aria-valuemin="0" 
+                                        aria-valuemax="100"
+                                    >
+                                    </div>
+                                </div>
+                                <p>
+                                    <span class="font-weight-bold text-primary">
+                                        Rp. {{ formatPrice(0) }} 
+                                    </span> Terkumpul dari 
+                                    <span class="font-weight-bold text-success">Rp. {{ formatPrice(campaign.target_donation) }}</span>
+                                </p>
+                                <p>
+                                    Persentase Donasi : 
+                                    <span class="text-info font-weight-bold">
+                                        {{ percentage(0, campaign.target_donation) }} %
+                                    </span> 
                                 </p>
                             </div>
                         </div>
-                        <div v-else>
-                            <div class="progress mb-2 mt-3">
-                                <div 
-                                    class="progress-bar bg-warning" 
-                                    role="progressbar" 
-                                    v-bind:style="{ width: percentage(0, campaign.target_donation) + '%' }"
-                                    v-bind:aria-valuenow="0"
-                                    aria-valuemin="0" 
-                                    aria-valuemax="100"
-                                >
-                                </div>
-                            </div>
-                            <p>
-                                <span class="font-weight-bold text-primary">Rp. 0 </span> terkumpul dari
-                                <span class="font-weight-bold text-success">Rp. {{ formatPrice(campaign.target_donation) }}</span>
-                            </p>
-                        </div> -->
+                        
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <span class="font-weight-bold">{{ donations.length }}</span> Donasi
@@ -181,8 +172,8 @@ export default {
             this.sumDonation = this.$store.getters['campaign/sumDonation'];
             this.donations = this.$store.getters['campaign/donations'];
             this.loading = false;
-            // console.log('sumDonation :', this.sumDonation);
-            // console.log('campaign :', this.campaign);
+            console.log('sumDonation :', this.sumDonation);
+            console.log('campaign :', this.campaign);
         },
     },
 
