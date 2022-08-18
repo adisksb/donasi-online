@@ -14,9 +14,17 @@
 export default {
     name: 'donation.success',
 
+    props: ['pending'],
+
     methods: {
         donasi() {
             this.$router.push({name: 'donation.index'});
+        }
+    },
+
+    mounted() {
+        if (this.pending) {
+            this.$toast.info(this.pending);
         }
     }
 }

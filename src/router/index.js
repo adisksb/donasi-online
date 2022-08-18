@@ -38,6 +38,7 @@ const routes = [
     {
         path: '/donation',
         name: 'donation.index',
+        props: true,
         meta: {
             auth: true
         },
@@ -54,6 +55,7 @@ const routes = [
     {
         path: '/donation/success',
         name: 'donation.success',
+        props: true,
         meta: {
             auth: true
         },
@@ -62,6 +64,7 @@ const routes = [
     {
         path: '/donation/failed',
         name: 'donation.failed',
+        props: true,
         meta: {
             auth: true
         },
@@ -70,6 +73,7 @@ const routes = [
     {
         path: '/donation/pending',
         name: 'donation.pending',
+        props: true,
         meta: {
             auth: true
         },

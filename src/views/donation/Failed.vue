@@ -13,9 +13,17 @@
 export default {
     name: 'donation.failed',
 
+    props: ['failed'],
+
     methods: {
         donation() {
             this.$router.push({name: 'donation.index'});
+        }
+    },
+
+    mounted() {
+        if (this.failed) {
+            this.$toast.error(this.failed);
         }
     }
 }

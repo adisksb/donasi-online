@@ -104,16 +104,13 @@ export default {
         async payment(snap_token) {
                 await window.snap.pay(snap_token, {
                     onSuccess: function () {
-                        router.push({name: 'donation.success'});
-                        this.$toast.success('Transaksi Pembayaran Berhasil');
+                        router.push({name: 'donation.success', params: { success: "Transaksi Pembayaran Berhasil"}});
                     },
                     onPending: function () {
-                        router.push({name: 'donation.pending'});
-                        this.$toast.success('Transaksi Berhasil, Silahkan Melakukan Pembayaran Donasi');
+                        router.push({name: 'donation.pending', params: { pending: "Transaksi Berhasil, Silahkan Melakukan Pembayaran Donasi"}});
                     },
                     onError: function () {
-                        router.push({name: 'donation.failed'}); 
-                        this.$toast.success('Transaksi Gagal');
+                        router.push({name: 'donation.failed', params: { failed: "Transaksi Gagal"}});
                     }
                 })
             }

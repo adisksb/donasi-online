@@ -13,9 +13,17 @@
 export default {
     name: 'donation.success',
 
+    props: ['success'],
+
     methods: {
         donasi() {
             this.$router.push({name: 'donation.index'});
+        }
+    },
+
+    mounted() {
+        if (this.success) {
+            this.$toast.success(this.success);
         }
     }
 }
