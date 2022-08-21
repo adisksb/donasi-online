@@ -130,6 +130,13 @@ const routes = [
         component: () => import( /* webpackChunkName: "search" */ '@/views/search/Index.vue')
     },
 
+    // Notifications
+    {
+        path: '/notifications',
+        name: 'notifications',
+        component: () => import( /* webpackChunkName: "notifications" */ '@/views/notifications/Index.vue')
+    },
+
     // 404
     {
         path: '*',

@@ -31,6 +31,19 @@
                                 Donasi Saya
                             </router-link>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" 
+                                href="#" 
+                                role="button" 
+                                data-toggle="dropdown" 
+                                aria-expanded="false"
+                            >
+                                Notifikasi
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item">Action</a>
+                            </div>
+                        </li>
                     </ul>
                     <Search />
                     <ul class="navbar-nav">

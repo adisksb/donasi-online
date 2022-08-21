@@ -16,6 +16,7 @@
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-content-loader": "^0.2.3",
+    "vue-pusher": "^1.1.0",
     "vue-router": "^3.2.0",
     "vue-toastification": "^1.7.14",
     "vueperslides": "^2.15.3",
