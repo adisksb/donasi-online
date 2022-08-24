@@ -5,6 +5,7 @@ import store from './store';
 import axios from 'axios';
 import Toast from "vue-toastification";
 import mixins from './mixins';
+import VueSocialSharing from 'vue-social-sharing';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import "vue-toastification/dist/index.css";
@@ -17,6 +18,7 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 Vue.config.productionTip = false;
 Vue.use(Toast);
 Vue.mixin(mixins);
+Vue.use(VueSocialSharing);
 
 new Vue({
   router,

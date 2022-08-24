@@ -56,10 +56,10 @@
                                     <strong>{{ countDay(campaign.max_date) }}</strong> hari lagi
                                 </div>
                                 <div class="mt-3">
-                                        <router-link :to="{name: 'campaign.show', params:{slug: campaign.slug }}"
-                                        class="btn btn-secondary w-100 font-weight-bold">
-                                            LIHAT
-                                        </router-link>
+                                    <router-link :to="{name: 'campaign.show', params:{slug: campaign.slug }}"
+                                    class="btn btn-secondary w-100 font-weight-bold">
+                                        LIHAT
+                                    </router-link>
                                 </div>
                             </div>
                         </div>

@@ -14,13 +14,18 @@
                             v-model="form.email"
                         >
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-1">
                         <input 
+                            id="password"
                             type="password" 
                             class="form-control" 
                             placeholder="Password"
                             v-model="form.password"
                         >
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkbox" v-model="checked" @change="showPassword">
+                        <label class="form-check-label" for="show-password">Show Password</label>
                     </div>
 
                     <div class="mt-2 mb-3">
@@ -50,6 +55,7 @@ export default {
                 email: '',
                 password: '',
             },
+            checked: false,
         }
     },
 
@@ -57,6 +63,15 @@ export default {
         ...mapActions({
             loginAuth: 'auth/login',
         }),
+
+        showPassword() {
+            let password = document.getElementById('password');
+            if (this.checked) {
+                password.setAttribute('type', 'text');
+            } else {
+                password.setAttribute('type', 'password');
+            }
+        },
 
         async login() {
             await this.loginAuth(this.form);

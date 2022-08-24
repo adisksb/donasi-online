@@ -81,6 +81,37 @@
                                 </router-link>
                             </div>
                         </div>
+                         <div class="mt-5">
+                            <ShareNetwork
+                                network="facebook"
+                                :url=url
+                                title="Donasi"
+                                class="btn btn-sm btn-primary mr-2"
+                            >
+                                <i class="fab fah fa-lg fa-facebook-f mr-2"></i>
+                                <span>Share on Facebook</span>
+                            </ShareNetwork>
+
+                             <ShareNetwork
+                                network="telegram"
+                                :url=url
+                                title="Donasi"
+                                class="btn btn-sm btn-info mr-2"
+                            >
+                                <i class="fab fah fa-lg fa-telegram-plane mr-2"></i>
+                                <span>Share on Telegram</span>
+                            </ShareNetwork>
+
+                             <ShareNetwork
+                                network="whatsApp"
+                                :url=url
+                                title="Donasi"
+                                class="btn btn-sm btn-success"
+                            >
+                                <i class="fab fah fa-lg fa-whatsapp mr-2"></i>
+                                <span>Share on WhatsApp</span>
+                            </ShareNetwork>
+                        </div>
                     </div>
                 </div>
                 <div class="card shadow mt-2">
@@ -156,6 +187,7 @@ export default {
           sumDonation : [],
           donations: [],
           loading: false,
+          url: `https://donasikita.netlify.app/campaign/${this.$route.params.slug}`
       }
   },
 
